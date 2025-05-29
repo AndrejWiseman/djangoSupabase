@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<div class="max-w-2xl mx-auto">
+
+    <h1 class="text-3xl text-center pt-10 mb-5">Jelovnik</h1>
+
+
+    {% for vrsta in vrste_jela %}
+        <div class="collapse collapse-arrow bg-base-200 border border-base-100 mb-3">
+            <label class="sr-only" for="vrsta-{{ vrsta.id }}">{{ vrsta.naziv }}</label>
+            <input type="radio" id="vrsta-{{ vrsta.id }}" name="my-accordion-2" />
+            
+            <div class="collapse-title font-semibold">{{ vrsta.naziv }}</div>
+
+            <div class="collapse-content text-sm">
+                {% for jelo in vrsta.jela.all %}
+                    <p><strong>{{ jelo.naziv }}</strong> - {{ jelo.cena }} KM</p>
+                    {% if jelo.opis %}
+                        <p>{{ jelo.opis }}</p>
+                    {% endif %}
+                    {% if jelo.slika %}
+                        <img src="{{ jelo.slika.url }}" alt="{{ jelo.naziv }}" style="max-width: 200px;">
+                    {% endif %}
+                    <hr class="my-2" />
+                {% empty %}
+                    <p>Nema jela za ovu kategoriju.</p>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+
+  
+
+    <!-- <div class="collapse collapse-arrow bg-base-100 border border-base-300 mb-3">
+        <label class="sr-only" for="dorucak">Select Dorucak</label>
+        <input type="radio" id="dorucak" name="my-accordion-2" title="Select Dorucak" />
+        
+        <div class="collapse-title font-semibold">Dorucak</div>
+
+        <div class="collapse-content text-sm">Click the "Sign Up" button in the top right corner and follow the registration process.</div>
+    </div> -->
+
+    
+
+</div>
+
+
+
+{% endblock %}
