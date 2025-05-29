@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: django-api
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn djangosupabase.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: djangosupabase.settings
+      - key: django-insecure-14@o$8nlum^#moul2&hcre225&5$1!u#fqc%^u0qsjik%)ar6x
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+    plan: free
